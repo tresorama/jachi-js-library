@@ -1,1 +1,1 @@
-# Whe working with HTML DOM
+# When working with HTML DOM
