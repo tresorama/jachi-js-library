@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module">
+      debugger;
+      import { ON_LOAD } from "../js-jachi-library-dom/on-load.js";
+    </script>
+    <!--
+      <script src="on_load.js"></script>
+    <script src="calculator.js"></script>
+    <script src="array.flatten.js"></script>
+    <script src="array.newArray.js"></script>
+    <script src="function.call.js"></script>
+    <script src="function.apply.js"></script>
+    -->
+  </head>
+  <body>
+    <script async>
+      debugger;
+      ON_LOAD.init();
+      ON_LOAD.add(function () {
+        console.log("started");
+      });
+    </script>
+    <script>
+      const ACTIONS = [
+        { name: "Calculator Chain", onClick: () => CALCULATOR_CHAIN() },
+        { name: "Array Flatten", onClick: () => ARRAY_FLATTEN() },
+        { name: "Array new Array()", onClick: () => ARRAY_NEWARRAY() },
+        { name: "Array new Array() 2", onClick: () => ARRAY_NEWARRAY_2() },
+        { name: "Function.call()", onClick: () => FUNCTION_CALL() },
+        { name: "Function.apply()", onClick: () => FUNCTION_APPLY() },
+      ];
+
+      // create all the buttons as copy of the existing one...
+      ON_LOAD.add(function () {
+        const template = document.querySelector(".action");
+        const parent = template.parentElement;
+        parent.removeChild(template);
+        let count = ACTIONS.length;
+        while (count > 0) {
+          parent.appendChild(template.cloneNode(true));
+          count--;
+        }
+      });
+      // inject data to buttons...
+      ON_LOAD.add(function () {
+        [...document.querySelectorAll(".action")].forEach((el, i) => {
+          const ACTION = ACTIONS[i];
+          const butt = el.querySelector("button");
+          butt.innerText = ACTION.name;
+          butt.onclick = ACTION.onClick;
+        });
+      });
+    </script>
+    <div class="actions">
+      <div class="action">
+        <button onclick=""></button>
+      </div>
+    </div>
+  </body>
+</html>
